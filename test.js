@@ -17,11 +17,16 @@ callback = function(response) {
   response.on('end', function () {
     var json = JSON.parse(str);
     var latestEntry = Object.keys(json["Time Series (Daily)"])[0];
+    var openingPrice = json["Time Series (Daily)"][latestEntry]["1. open"];
+    var closingPrice = json["Time Series (Daily)"][latestEntry]["4. close"];
+    var highPrice = json["Time Series (Daily)"][latestEntry]["2. high"];
+    var lowPrice = json["Time Series (Daily)"][latestEntry]["3. low"];
+    
     console.log("Time: " + latestEntry);
-    console.log("Opening Price: " + json["Time Series (Daily)"][latestEntry]["1. open"]);
-    console.log("Closing Price: " + json["Time Series (Daily)"][latestEntry]["4. close"]);
-    console.log("High Price: " + json["Time Series (Daily)"][latestEntry]["2. high"]);
-    console.log("Low Price: " + json["Time Series (Daily)"][latestEntry]["3. low"]);
+    console.log("Opening Price: " + openingPrice);
+    console.log("Closing Price: " + closingPrice);
+    console.log("High Price: " + highPrice);
+    console.log("Low Price: " + lowPrice);
   });
 }
 
