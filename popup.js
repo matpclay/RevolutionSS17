@@ -53,6 +53,6 @@ function retQuote(ticker) {
         xmlhttp.open("GET", url, true);
         xmlhttp.send();
     }
-
+    
     ajax_get(location, responseReceived);
 }
