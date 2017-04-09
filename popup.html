@@ -2,15 +2,19 @@
 <html>
   <head>
     <title>Stock Extension</title>
-    <link rel="stylesheet" type="text/css" href="stylesheet.css">
-    <script src="popup.js"></script>
   </head>
   <body style="width: 300px;">
     <h1>Stock Extension</h1>
-    <h3>Ticker: </h3>
-    <h4>Most Recent Price </h4>
+    <h3 id="ticker">Ticker: </h3>
+    <h3 id="close">Most Recent Price: </h3>
+    <h4 id="time">Time: </h4>
+    <h4 id="open">Most Recent Open: </h4>
+    <h4 id="high">Daily High: </h4>
+    <h4 id="low">Daily Low: </h4>
     <form>
-      <input type="text" placeholder="Enter ticker" required>
-      <input type="button" value="Search">
+      <input type="text" placeholder="Enter ticker" id="search" required>
+      <input type="button" value="Search" id="submit">
+    </form>
+    <script src="popup.js"></script>
   </body>
 </html>

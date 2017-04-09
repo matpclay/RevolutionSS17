@@ -1,9 +1,11 @@
+// DEPRECATED
+
 var http = require('http');
 var location = '/query?function=TIME_SERIES_DAILY&symbol=';
 var ticker = "MSFT"; // User input ticker into ticker variable in order to specify search criteria.
 var apiKey = "&apikey=8153"
 
-location += ticker + apiKey; 
+location += ticker + apiKey;
 
 var options = {
   host: 'www.alphavantage.co',
@@ -26,7 +28,7 @@ callback = function(response) {
     var closingPrice = json["Time Series (Daily)"][latestEntry]["4. close"];
     var highPrice = json["Time Series (Daily)"][latestEntry]["2. high"];
     var lowPrice = json["Time Series (Daily)"][latestEntry]["3. low"];
-    
+
     console.log("Time: " + latestEntry);
     console.log("Opening Price: " + openingPrice);
     console.log("Closing Price: " + closingPrice);
