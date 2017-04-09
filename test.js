@@ -1,8 +1,13 @@
 var http = require('http');
+var location = '/query?function=TIME_SERIES_DAILY&symbol=';
+var ticker = "MSFT"; // User input ticker into ticker variable in order to specify search criteria.
+var apiKey = "&apikey=8153"
+
+location += ticker + apiKey; 
 
 var options = {
   host: 'www.alphavantage.co',
-  path: '/query?function=TIME_SERIES_DAILY&symbol=MSFT&apikey=8153'
+  path: location
 };
 
 callback = function(response) {
