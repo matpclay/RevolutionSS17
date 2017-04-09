@@ -1,4 +1,5 @@
 var tick = document.getElementById('search');
+//console.log(tick);
 submit.addEventListener('click', function() {
   retQuote(tick);
 }, false);
@@ -6,13 +7,16 @@ submit.addEventListener('click', function() {
 function retQuote(ticker) {
   var location = '/query?function=TIME_SERIES_DAILY&symbol=';
   var apiKey = "&apikey=8153";
-  var host ='www.alphavantage.co';
+  var host ='http://www.alphavantage.co';
 
   location = host + location + ticker.value + apiKey;
+  var t = "Ticker: ";
+  var c = "Most Recent Price: ";
+  var o = "Most Recent Open: ";
+  var h = "Daily High: ";
+  var l = "Daily Low: ";
 
-    var str = '';
-
-    //the whole response has been recieved, so we just print it out here
+    // the whole response has been recieved, so we just print it out here
     function responseReceived(json) {
       var latestEntry = Object.keys(json["Time Series (Daily)"])[0];
       var openingPrice = json["Time Series (Daily)"][latestEntry]["1. open"];
@@ -25,27 +29,30 @@ function retQuote(ticker) {
       console.log("High Price: " + highPrice);
       console.log("Low Price: " + lowPrice);
       // append values to HTML
-      document.getElementById('ticker').innerHTML = ticker;
-      document.getElementById('time').innerHTML = latestEntry;
-      document.getElementById('close').innerHTML = closingPrice;
-      document.getElementById('open').innerHTML = openingPrice;
-      document.getElementById('high').innerHTML = highPrice;
-      document.getElementById('low').innerHTML = lowPrice;
+      document.getElementById('ticker').innerText = t + ticker.value.toUpperCase();
+      document.getElementById('close').innerText = c + closingPrice;
+      document.getElementById('open').innerText = o + openingPrice;
+      document.getElementById('high').innerText = h + highPrice;
+      document.getElementById('low').innerText = l + lowPrice;
     };
+    function ajax_get(url, callback) {
+        xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                console.log('responseText:' + xmlhttp.responseText);
+                try {
+                    var data = JSON.parse(xmlhttp.responseText);
+                } catch(err) {
+                    console.log(err.message + " in " + xmlhttp.responseText);
+                    return;
+                }
+                callback(data);
+            }
+        };
 
-var xhr = new XMLHttpRequest();
-xhr.onSomething = function(response) {
-  responseReceived(responseJson);
-}
-xhr.open();
-xhr.send();
+        xmlhttp.open("GET", url, true);
+        xmlhttp.send();
+    }
 
-  // fetch(location)
-  //   .then(function(response) {
-  //     return response.json();
-  //   })
-  //   .then(function(responseJson) {
-  //     // do something useful with the json data
-  //     responseReceived(responseJson);
-  //   });
+    ajax_get(location, responseReceived);
 }
